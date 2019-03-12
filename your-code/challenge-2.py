@@ -2,37 +2,39 @@
 The code below generates a given number of random strings that consists of numbers and 
 lower case English letters. You can also define the range of the variable lengths of
 the strings being generated.
-
-The code is functional but has a lot of room for improvement. Use what you have learned
-about simple and efficient code, refactor the code.
 """
 
-def RandomStringGenerator(l=12, a=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']):
-    p = 0
-    s = ''
-    while p<l:
-        import random
-        s += random.choice(a)
-        p += 1
-    return s
 
-def BatchStringGenerator(n, a=8, b=12):
-    r = []
-    for i in range(n):
-        c = None
-        if a < b:
+def random_string_generator(length=12,
+                            letters=('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+                                     'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4',
+                                     '5', '6', '7', '8', '9')):
+    counter = 0
+    random_string = ''
+    while counter < length:
+        import random
+        random_string += random.choice(letters)
+        counter += 1
+    return random_string
+
+
+def batch_string_generator(number_of_strings, minimum_length=8, maximum_length=12):
+    batch = []
+    for i in range(number_of_strings):
+        if minimum_length < maximum_length:
             import random
-            c = random.choice(range(a, b))
-        elif a == b:
-            c = a
+            string_length = random.choice(range(minimum_length, maximum_length))
+        elif minimum_length == maximum_length:
+            string_length = minimum_length
         else:
             import sys
             sys.exit('Incorrect min and max string lengths. Try again.')
-        r.append(RandomStringGenerator(c))
-    return r
+        batch.append(random_string_generator(string_length))
+    return batch
 
-a = input('Enter minimum string length: ')
-b = input('Enter maximum string length: ')
-n = input('How many random strings to generate? ')
 
-print(BatchStringGenerator(int(n), int(a), int(b)))
+min_len = input('Enter minimum string length: ')
+max_len = input('Enter maximum string length: ')
+num_of_strings = input('How many random strings to generate? ')
+
+print(batch_string_generator(int(num_of_strings), int(min_len), int(max_len)))

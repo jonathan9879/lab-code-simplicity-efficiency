@@ -12,19 +12,21 @@ The following function shows one way to solve the problem but the code is not id
 Refactor the code based on what you have learned about code simplicity and efficiency.
 """
 
-def my_function(X):
+
+def maximum_right_triangle_side(max_side_value):
     solutions = []
-    for x in range(5, X):
-        for y in range(4, X):
-            for z in range(3, X):
-                if (x*x==y*y+z*z):
-                  solutions.append([x, y, z])
-    m = 0
+    for hypotenuse in range(5, max_side_value):
+        for side_1 in range(4, max_side_value):
+            for side_2 in range(3, max_side_value):
+                if hypotenuse * hypotenuse == side_1 * side_1 + side_2 * side_2:
+                    solutions.append([hypotenuse, side_1, side_2])
+    max_right_side = 0
     for solution in solutions:
-        if m < max(solution):
-            m = max(solution)
-    return m
+        if max_right_side < max(solution):
+            max_right_side = max(solution)
+    return max_right_side
 
-X = input("What is the maximal length of the triangle side? Enter a number: ")
 
-print("The longest side possible is " + str(my_function(int(X))))
+max_side = input("What is the maximal length of the triangle side? Enter a number: ")
+
+print(f"The longest side possible is  {maximum_right_triangle_side(int(max_side))}")
